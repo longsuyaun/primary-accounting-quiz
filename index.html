@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初级会计职称考试 - 练习自测系统</title>
+    <title>初级会计职称考试 - 练习自测系统（100 题完整版）</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -13,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -28,29 +28,40 @@
         }
         .header h1 { font-size: 28px; margin-bottom: 10px; }
         .header p { opacity: 0.9; font-size: 14px; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px;
+        }
         .stats-bar {
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
             background: #f8f9fa;
-            padding: 15px;
+            padding: 20px;
             border-bottom: 2px solid #e9ecef;
         }
         .stat-item { text-align: center; }
-        .stat-number { font-size: 24px; font-weight: bold; color: #667eea; }
+        .stat-number { font-size: 28px; font-weight: bold; color: #667eea; }
         .stat-label { font-size: 12px; color: #6c757d; }
         .nav-tabs {
             display: flex;
             background: #f8f9fa;
             border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
         }
         .nav-tab {
             flex: 1;
+            min-width: 150px;
             padding: 15px;
             text-align: center;
             cursor: pointer;
             border: none;
             background: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             color: #6c757d;
             transition: all 0.3s;
@@ -72,6 +83,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .question-number {
             background: #667eea;
@@ -136,6 +149,7 @@
         .btn-primary:hover { background: #5568d3; transform: translateY(-2px); }
         .btn-success { background: #28a745; color: white; }
         .btn-info { background: #17a2b8; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
         .explanation {
             display: none;
             background: #e8f5e9;
@@ -159,9 +173,9 @@
         .score-level { font-size: 20px; opacity: 0.9; }
         .progress-bar {
             width: 100%;
-            height: 10px;
+            height: 12px;
             background: #e9ecef;
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
             margin: 20px 0;
         }
@@ -194,7 +208,14 @@
             font-size: 14px;
             margin-right: 10px;
         }
-        @media (max-width: 600px) {
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 768px) {
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
             .header h1 { font-size: 22px; }
             .question-text { font-size: 16px; }
         }
@@ -204,7 +225,12 @@
     <div class="container">
         <div class="header">
             <h1>📚 初级会计职称考试</h1>
-            <p>练习自测系统 - 2026 年复习资料（50 题完整版）</p>
+            <p>练习自测系统 - 2026 年复习资料（100 题完整版）</p>
+            <div>
+                <span class="badge">💰 会计实务 50 题</span>
+                <span class="badge">⚖️ 经济法 50 题</span>
+                <span class="badge">📝 单选 + 多选 + 判断</span>
+            </div>
         </div>
         
         <div class="stats-bar">
@@ -220,16 +246,25 @@
                 <div class="stat-number" id="accuracy-rate">0%</div>
                 <div class="stat-label">正确率</div>
             </div>
+            <div class="stat-item">
+                <div class="stat-number" id="remaining">100</div>
+                <div class="stat-label">剩余题</div>
+            </div>
         </div>
         
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('accounting')">💰 会计实务 (25 题)</button>
-            <button class="nav-tab" onclick="showSection('economy')">⚖️ 经济法 (25 题)</button>
+            <button class="nav-tab active" onclick="showSection('accounting')">💰 会计实务 (50 题)</button>
+            <button class="nav-tab" onclick="showSection('economy')">⚖️ 经济法 (50 题)</button>
             <button class="nav-tab" onclick="showSection('summary')">📊 答题统计</button>
         </div>
         
         <div class="content">
             <div id="accounting" class="section active">
+                <div class="mode-buttons">
+                    <button class="btn btn-primary" onclick="startPractice('accounting', 'all')">📝 全部练习</button>
+                    <button class="btn btn-info" onclick="startPractice('accounting', 'weak')">💪 薄弱点强化</button>
+                    <button class="btn btn-warning" onclick="startPractice('accounting', 'random')">🎲 随机 10 题</button>
+                </div>
                 <div class="chapter-filter">
                     <label>📌 按章节筛选：</label>
                     <select onchange="filterQuestions('accounting', this.value)">
@@ -242,6 +277,8 @@
                         <option value="所有者权益">所有者权益</option>
                         <option value="收入费用">收入费用</option>
                         <option value="财务报表">财务报表</option>
+                        <option value="会计凭证">会计凭证</option>
+                        <option value="会计账簿">会计账簿</option>
                     </select>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" id="accounting-progress" style="width: 0%"></div></div>
@@ -249,6 +286,11 @@
             </div>
             
             <div id="economy" class="section">
+                <div class="mode-buttons">
+                    <button class="btn btn-primary" onclick="startPractice('economy', 'all')">📝 全部练习</button>
+                    <button class="btn btn-info" onclick="startPractice('economy', 'weak')">💪 薄弱点强化</button>
+                    <button class="btn btn-warning" onclick="startPractice('economy', 'random')">🎲 随机 10 题</button>
+                </div>
                 <div class="chapter-filter">
                     <label>📌 按章节筛选：</label>
                     <select onchange="filterQuestions('economy', this.value)">
@@ -269,19 +311,19 @@
             <div id="summary" class="section">
                 <div class="score-display">
                     <div>总得分</div>
-                    <div class="score-number" id="total-score">0 / 50</div>
+                    <div class="score-number" id="total-score">0 / 100</div>
                     <div class="score-level" id="score-level">开始答题吧！</div>
                 </div>
                 <div style="display: flex; justify-content: space-around; margin: 20px 0;">
                     <div style="text-align: center;">
                         <div style="font-size: 36px; color: #667eea;" id="accounting-score">0</div>
                         <div style="color: #6c757d;">会计实务</div>
-                        <div style="font-size: 12px;">(25 题)</div>
+                        <div style="font-size: 12px;">(50 题)</div>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 36px; color: #764ba2;" id="economy-score">0</div>
                         <div style="color: #6c757d;">经济法</div>
-                        <div style="font-size: 12px;">(25 题)</div>
+                        <div style="font-size: 12px;">(50 题)</div>
                     </div>
                 </div>
                 <div class="action-buttons">
@@ -293,6 +335,7 @@
     </div>
     
     <script>
+        // 会计实务 50 题
         const accountingQuestions = [
             {id:1,type:"单选",point:"会计要素",text:"下列属于企业资产要素的是？",options:{A:"实收资本",B:"应付账款",C:"银行存款",D:"未分配利润"},answer:"C",explanation:"银行存款属于资产要素，实收资本和未分配利润属于所有者权益，应付账款属于负债。"},
             {id:2,type:"单选",point:"借贷记账法",text:"借贷记账法的记账规则是？",options:{A:"有借必有贷，借贷必相等",B:"借方增加，贷方减少",C:"资产在借方，负债在贷方",D:"收入增加记借方"},answer:"A",explanation:"借贷记账法的基本规则是：有借必有贷，借贷必相等。"},
@@ -318,9 +361,35 @@
             {id:22,type:"单选",point:"固定资产",text:"固定资产折旧应计入的科目是？",options:{A:"管理费用",B:"制造费用",C:"根据用途计入不同科目",D:"销售费用"},answer:"C",explanation:"固定资产折旧根据用途计入不同科目：管理部门用计入管理费用，生产车间用计入制造费用，销售部门用计入销售费用。"},
             {id:23,type:"多选",point:"财务报表",text:"下列属于财务报表的有？",options:{A:"资产负债表",B:"利润表",C:"现金流量表",D:"所有者权益变动表"},answer:"ABCD",explanation:"财务报表包括：资产负债表、利润表、现金流量表、所有者权益变动表及附注。"},
             {id:24,type:"判断",point:"会计信息质量",text:"会计信息质量要求中的可比性要求同一企业不同时期发生的相同交易应采用一致的会计政策。",answer:"正确",explanation:"可比性要求同一企业不同时期可比（纵向可比），不同企业相同会计期间可比（横向可比）。"},
-            {id:25,type:"单选",point:"会计要素",text:"下列各项中，属于反映企业经营成果的会计要素是？",options:{A:"资产",B:"负债",C:"所有者权益",D:"利润"},answer:"D",explanation:"反映经营成果的会计要素包括：收入、费用、利润。资产、负债、所有者权益反映财务状况。"}
+            {id:25,type:"单选",point:"会计要素",text:"下列各项中，属于反映企业经营成果的会计要素是？",options:{A:"资产",B:"负债",C:"所有者权益",D:"利润"},answer:"D",explanation:"反映经营成果的会计要素包括：收入、费用、利润。资产、负债、所有者权益反映财务状况。"},
+            {id:26,type:"单选",point:"资产",text:"应收账款的入账价值不包括？",options:{A:"销售商品价款",B:"增值税销项税额",C:"代垫运杂费",D:"商业折扣"},answer:"D",explanation:"商业折扣在销售时已扣除，不计入应收账款。应收账款包括价款、增值税、代垫费用等。"},
+            {id:27,type:"多选",point:"资产",text:"下列各项中，应计入存货采购成本的有？",options:{A:"购买价款",B:"进口关税",C:"运输途中的合理损耗",D:"入库前的挑选整理费"},answer:"ABCD",explanation:"存货采购成本包括：购买价款、相关税费、运输费、装卸费、保险费、运输途中合理损耗、入库前挑选整理费等。"},
+            {id:28,type:"判断",point:"资产",text:"交易性金融资产持有期间取得的现金股利应计入投资收益。",answer:"正确",explanation:"交易性金融资产持有期间，被投资单位宣告发放的现金股利，应确认为投资收益。"},
+            {id:29,type:"单选",point:"负债",text:"下列各项中，应通过\"应付职工薪酬\"科目核算的是？",options:{A:"职工工资",B:"职工福利费",C:"社会保险费",D:"以上都是"},answer:"D",explanation:"应付职工薪酬核算企业应付给职工的各种薪酬，包括工资、福利费、社会保险费、住房公积金等。"},
+            {id:30,type:"单选",point:"所有者权益",text:"下列各项中，不属于留存收益的是？",options:{A:"资本公积",B:"盈余公积",C:"未分配利润",D:"以上都不是"},answer:"A",explanation:"留存收益包括盈余公积和未分配利润。资本公积不属于留存收益。"},
+            {id:31,type:"多选",point:"收入",text:"下列各项中，应确认为其他业务收入的有？",options:{A:"销售材料收入",B:"出租固定资产租金收入",C:"出售无形资产净收益",D:"出租包装物租金收入"},answer:"ABD",explanation:"其他业务收入包括销售材料、出租固定资产、出租包装物等。出售无形资产净收益计入资产处置损益。"},
+            {id:32,type:"判断",point:"费用",text:"期间费用包括管理费用、销售费用和财务费用。",answer:"正确",explanation:"期间费用是指企业日常活动中不能直接归属于某个特定成本核算对象的费用，包括管理费用、销售费用和财务费用。"},
+            {id:33,type:"单选",point:"财务报表",text:"下列各项中，属于资产负债表流动负债项目的是？",options:{A:"长期借款",B:"应付债券",C:"应付票据",D:"长期应付款"},answer:"C",explanation:"应付票据属于流动负债，其他三项属于非流动负债。"},
+            {id:34,type:"多选",point:"财务报表",text:"下列各项中，属于利润表项目的有？",options:{A:"营业收入",B:"营业成本",C:"税金及附加",D:"销售费用"},answer:"ABCD",explanation:"利润表项目包括营业收入、营业成本、税金及附加、销售费用、管理费用、财务费用等。"},
+            {id:35,type:"判断",point:"会计凭证",text:"原始凭证金额有错误的，应当由出具单位重开，不得在原始凭证上更正。",answer:"正确",explanation:"原始凭证金额有错误的，必须由出具单位重开，不得更正。其他内容错误可由出具单位更正并盖章。"},
+            {id:36,type:"单选",point:"会计账簿",text:"下列各项中，应采用数量金额式账页格式的是？",options:{A:"库存现金日记账",B:"银行存款日记账",C:"原材料明细账",D:"管理费用明细账"},answer:"C",explanation:"原材料明细账应采用数量金额式，同时登记数量和金额。现金和银行存款日记账采用三栏式，管理费用明细账采用多栏式。"},
+            {id:37,type:"多选",point:"资产",text:"下列各项中，应计提固定资产折旧的有？",options:{A:"季节性停用的设备",B:"已提足折旧继续使用的设备",C:"未使用的房屋",D:"经营租入的设备"},answer:"AC",explanation:"季节性停用和未使用的固定资产应计提折旧。已提足折旧继续使用和经营租入的设备不计提折旧。"},
+            {id:38,type:"判断",point:"资产",text:"无形资产摊销一定计入管理费用。",answer:"错误",explanation:"无形资产摊销根据用途计入不同科目：管理用计入管理费用，生产用计入制造费用，出租用计入其他业务成本。"},
+            {id:39,type:"单选",point:"负债",text:"下列各项中，不属于流动负债的是？",options:{A:"预收账款",B:"预付账款",C:"应付利息",D:"一年内到期的长期借款"},answer:"B",explanation:"预付账款属于资产，不属于负债。预收账款、应付利息、一年内到期的长期借款都属于流动负债。"},
+            {id:40,type:"单选",point:"所有者权益",text:"下列各项中，会引起所有者权益总额发生增减变动的是？",options:{A:"盈余公积转增资本",B:"资本公积转增资本",C:"宣告发放现金股利",D:"盈余公积弥补亏损"},answer:"C",explanation:"宣告发放现金股利会减少未分配利润，从而减少所有者权益总额。其他三项是所有者权益内部结转，不影响总额。"},
+            {id:41,type:"多选",point:"收入",text:"下列各项中，应计入营业外收入的有？",options:{A:"盘盈利得",B:"捐赠利得",C:"罚款收入",D:"确实无法支付的应付账款"},answer:"ABCD",explanation:"营业外收入包括盘盈利得、捐赠利得、罚款收入、无法支付的应付款项等非日常活动形成的利得。"},
+            {id:42,type:"判断",point:"费用",text:"生产成本属于费用要素。",answer:"错误",explanation:"生产成本属于成本，不属于费用要素。费用包括期间费用（管理费用、销售费用、财务费用）。"},
+            {id:43,type:"单选",point:"会计等式",text:"某企业资产总额为 100 万元，负债总额为 40 万元，则所有者权益总额为？",options:{A:"40 万元",B:"60 万元",C:"100 万元",D:"140 万元"},answer:"B",explanation:"根据会计等式：资产=负债 + 所有者权益，所有者权益=资产 - 负债=100-40=60 万元。"},
+            {id:44,type:"多选",point:"会计科目",text:"下列各项中，属于损益类科目的有？",options:{A:"主营业务收入",B:"主营业务成本",C:"本年利润",D:"所得税费用"},answer:"ABD",explanation:"损益类科目包括收入类（主营业务收入等）、费用类（主营业务成本、所得税费用等）。本年利润属于所有者权益类科目。"},
+            {id:45,type:"判断",point:"会计凭证",text:"记账凭证可以根据每一张原始凭证填制，也可以根据若干张同类原始凭证汇总填制。",answer:"正确",explanation:"记账凭证可以根据一张原始凭证填制，也可以根据若干张同类原始凭证汇总填制，还可以根据原始凭证汇总表填制。"},
+            {id:46,type:"单选",point:"会计账簿",text:"下列各项中，适用于订本式账簿的是？",options:{A:"原材料明细账",B:"管理费用明细账",C:"库存现金日记账",D:"应收账款明细账"},answer:"C",explanation:"订本式账簿适用于总分类账、库存现金日记账、银行存款日记账等重要账簿。明细账一般采用活页式。"},
+            {id:47,type:"多选",point:"资产",text:"下列各项中，属于其他应收款核算内容的有？",options:{A:"应收的各种赔款",B:"应收的出租包装物租金",C:"存出保证金",D:"代购货单位垫付的运杂费"},answer:"ABC",explanation:"其他应收款核算除应收票据、应收账款、预付账款等以外的各种应收、暂付款项。代购货单位垫付的运杂费计入应收账款。"},
+            {id:48,type:"判断",point:"负债",text:"企业计提短期借款利息时，应借记\"财务费用\"科目，贷记\"应付利息\"科目。",answer:"正确",explanation:"短期借款利息属于筹资费用，计提时借记\"财务费用\"，贷记\"应付利息\"。"},
+            {id:49,type:"单选",point:"所有者权益",text:"下列各项中，不属于资本公积来源的是？",options:{A:"资本溢价",B:"股本溢价",C:"直接计入所有者权益的利得",D:"留存收益"},answer:"D",explanation:"资本公积来源包括资本溢价、股本溢价、直接计入所有者权益的利得等。留存收益是独立的权益项目。"},
+            {id:50,type:"多选",point:"财务报表",text:"下列各项中，属于现金流量表现金及现金等价物的有？",options:{A:"库存现金",B:"银行存款",C:"其他货币资金",D:"三个月内到期的债券投资"},answer:"ABCD",explanation:"现金及现金等价物包括库存现金、银行存款、其他货币资金和三个月内到期的债券投资等。"}
         ];
         
+        // 经济法 50 题
         const economyQuestions = [
             {id:1,type:"单选",point:"票据法",text:"票据的付款期限最长不得超过？",options:{A:"3 个月",B:"6 个月",C:"9 个月",D:"1 年"},answer:"B",explanation:"票据的付款期限最长不得超过 6 个月。"},
             {id:2,type:"单选",point:"票据法",text:"下列不属于票据基本当事人的是？",options:{A:"出票人",B:"收款人",C:"付款人",D:"背书人"},answer:"D",explanation:"票据基本当事人包括：出票人、收款人、付款人。背书人是非基本当事人。"},
@@ -342,16 +411,42 @@
             {id:18,type:"多选",point:"票据法",text:"下列各项中，属于票据行为的有？",options:{A:"出票",B:"背书",C:"承兑",D:"保证"},answer:"ABCD",explanation:"票据行为包括：出票、背书、承兑、保证。"},
             {id:19,type:"单选",point:"合同法",text:"当事人一方不履行合同义务，应当承担的违约责任不包括？",options:{A:"继续履行",B:"采取补救措施",C:"赔偿损失",D:"支付定金"},answer:"D",explanation:"违约责任包括：继续履行、采取补救措施、赔偿损失、支付违约金等。支付定金不是违约责任形式。"},
             {id:20,type:"判断",point:"公司法",text:"一人有限责任公司的股东不能证明公司财产独立于股东自己财产的，应当对公司债务承担连带责任。",answer:"正确",explanation:"一人有限责任公司股东不能证明公司财产独立的，适用\"法人人格否认\"制度，对公司债务承担连带责任。"},
-            {id:21,type:"单选",point:"增值税",text:"下列各项中，不属于增值税征税范围的是？",options:{A:"销售货物",B:"提供加工修理修配劳务",C:"销售服务",D:"转让无形资产使用权"},answer:"D",explanation:"转让无形资产使用权属于营业税征税范围（营改增前），营改增后销售无形资产属于增值税征税范围，但\"使用权\"表述不准确。"},
+            {id:21,type:"单选",point:"增值税",text:"下列各项中，不属于增值税征税范围的是？",options:{A:"销售货物",B:"提供加工修理修配劳务",C:"销售服务",D:"转让土地使用权"},answer:"D",explanation:"转让土地使用权属于营业税征税范围（营改增前）。营改增后销售无形资产属于增值税征税范围。"},
             {id:22,type:"单选",point:"支付结算",text:"单位人民币卡账户的资金一律从其什么转账存入？",options:{A:"基本存款账户",B:"一般存款账户",C:"专用存款账户",D:"临时存款账户"},answer:"A",explanation:"单位人民币卡账户的资金一律从其基本存款账户转账存入，不得存取现金。"},
             {id:23,type:"多选",point:"会计法律制度",text:"下列各项中，属于会计职业道德内容的有？",options:{A:"爱岗敬业",B:"诚实守信",C:"廉洁自律",D:"客观公正"},answer:"ABCD",explanation:"会计职业道德包括：爱岗敬业、诚实守信、廉洁自律、客观公正、坚持准则、提高技能、参与管理、强化服务。"},
             {id:24,type:"判断",point:"合同法",text:"格式条款与非格式条款不一致的，应当采用非格式条款。",answer:"正确",explanation:"格式条款与非格式条款不一致的，应当采用非格式条款，这是保护弱势一方利益的原则。"},
-            {id:25,type:"单选",point:"公司法",text:"有限责任公司股东会作出修改公司章程的决议，必须经代表多少表决权的股东通过？",options:{A:"1/2 以上",B:"2/3 以上",C:"3/4 以上",D:"全体"},answer:"B",explanation:"修改公司章程、增减注册资本、合并分立解散等重大事项，必须经代表 2/3 以上表决权的股东通过。"}
+            {id:25,type:"单选",point:"公司法",text:"有限责任公司股东会作出修改公司章程的决议，必须经代表多少表决权的股东通过？",options:{A:"1/2 以上",B:"2/3 以上",C:"3/4 以上",D:"全体"},answer:"B",explanation:"修改公司章程、增减注册资本、合并分立解散等重大事项，必须经代表 2/3 以上表决权的股东通过。"},
+            {id:26,type:"单选",point:"票据法",text:"银行本票的提示付款期限自出票日起最长不得超过？",options:{A:"10 天",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"C",explanation:"银行本票的提示付款期限自出票日起最长不得超过 2 个月。"},
+            {id:27,type:"多选",point:"增值税",text:"下列各项中，适用 9% 增值税税率的有？",options:{A:"销售不动产",B:"转让土地使用权",C:"提供交通运输服务",D:"提供现代服务"},answer:"ABC",explanation:"9% 税率适用于：交通运输、邮政、基础电信、建筑、不动产租赁、销售不动产、转让土地使用权等。现代服务适用 6%。"},
+            {id:28,type:"判断",point:"所得税",text:"企业发生的职工福利费支出，不超过工资薪金总额 14% 的部分，准予扣除。",answer:"正确",explanation:"企业发生的职工福利费支出，不超过工资薪金总额 14% 的部分，准予在企业所得税前扣除。"},
+            {id:29,type:"单选",point:"会计法律制度",text:"担任单位会计机构负责人的，应当具备会计师以上专业技术职务资格或者从事会计工作几年以上经历？",options:{A:"1 年",B:"2 年",C:"3 年",D:"5 年"},answer:"C",explanation:"担任单位会计机构负责人的，应当具备会计师以上专业技术职务资格或者从事会计工作 3 年以上经历。"},
+            {id:30,type:"多选",point:"公司法",text:"下列各项中，属于股份有限公司设立方式的有？",options:{A:"发起设立",B:"募集设立",C:"独资设立",D:"合伙设立"},answer:"AB",explanation:"股份有限公司的设立方式包括发起设立和募集设立两种。"},
+            {id:31,type:"判断",point:"票据法",text:"票据金额以中文大写和数码同时记载，二者必须一致，二者不一致的，票据无效。",answer:"正确",explanation:"票据金额以中文大写和数码同时记载，二者必须一致，二者不一致的，票据无效。"},
+            {id:32,type:"单选",point:"合同法",text:"当事人采用合同书形式订立合同的，自何时合同成立？",options:{A:"签字时",B:"盖章时",C:"签字或者盖章时",D:"交付时"},answer:"C",explanation:"当事人采用合同书形式订立合同的，自当事人均签名、盖章或者按指印时合同成立。"},
+            {id:33,type:"多选",point:"支付结算",text:"下列各项中，属于一般存款账户使用范围的有？",options:{A:"借款转存",B:"借款归还",C:"现金缴存",D:"现金支取"},answer:"ABC",explanation:"一般存款账户用于办理借款转存、借款归还、现金缴存，但不得办理现金支取。"},
+            {id:34,type:"判断",point:"增值税",text:"纳税人兼营不同税率的货物或者应税劳务，应当分别核算不同税率货物或者应税劳务的销售额。",answer:"正确",explanation:"纳税人兼营不同税率的货物或者应税劳务，应当分别核算；未分别核算的，从高适用税率。"},
+            {id:35,type:"单选",point:"所得税",text:"下列各项中，属于企业所得税免税收入的有？",options:{A:"国债利息收入",B:"符合条件的股息、红利",C:"财政拨款",D:"行政事业性收费"},answer:"A",explanation:"国债利息收入属于免税收入。财政拨款和行政事业性收费属于不征税收入。"},
+            {id:36,type:"多选",point:"会计法律制度",text:"下列各项中，属于会计监督体系的有？",options:{A:"单位内部会计监督",B:"政府监督",C:"社会监督",D:"舆论监督"},answer:"ABC",explanation:"会计监督体系包括：单位内部会计监督、政府监督、社会监督三位一体。"},
+            {id:37,type:"判断",point:"公司法",text:"股份有限公司董事会成员中可以有公司职工代表。",answer:"正确",explanation:"股份有限公司董事会成员中可以有公司职工代表。有限责任公司董事会成员中应当有公司职工代表。"},
+            {id:38,type:"单选",point:"票据法",text:"汇票的保证人未记载被保证人名称的，已承兑的汇票，谁为被保证人？",options:{A:"出票人",B:"承兑人",C:"付款人",D:"背书人"},answer:"B",explanation:"保证人未记载被保证人名称的，已承兑的汇票，承兑人为被保证人；未承兑的汇票，出票人为被保证人。"},
+            {id:39,type:"多选",point:"合同法",text:"下列各项中，属于合同权利义务终止情形的有？",options:{A:"债务已经按照约定履行",B:"合同解除",C:"债务相互抵销",D:"债务人依法将标的物提存"},answer:"ABCD",explanation:"合同权利义务终止的情形包括：履行、解除、抵销、提存、免除、混同等。"},
+            {id:40,type:"判断",point:"支付结算",text:"票据的出票日期必须使用中文大写。",answer:"正确",explanation:"票据的出票日期必须使用中文大写，为防止变造票据的出票日期。"},
+            {id:41,type:"单选",point:"增值税",text:"纳税人销售货物，增值税纳税义务发生时间为？",options:{A:"收讫销售款项当天",B:"取得索取销售款项凭据当天",C:"开具发票当天",D:"以上都是"},answer:"D",explanation:"纳税人销售货物，纳税义务发生时间为收讫销售款项或取得索取销售款项凭据的当天；先开具发票的，为开具发票的当天。"},
+            {id:42,type:"多选",point:"所得税",text:"下列各项中，属于个人所得税综合所得的有？",options:{A:"工资薪金所得",B:"劳务报酬所得",C:"稿酬所得",D:"特许权使用费所得"},answer:"ABCD",explanation:"个人所得税综合所得包括：工资薪金所得、劳务报酬所得、稿酬所得、特许权使用费所得四项。"},
+            {id:43,type:"判断",point:"会计法律制度",text:"各单位应当根据会计业务的需要，设置会计机构，或者在有关机构中设置会计人员并指定会计主管人员。",answer:"正确",explanation:"各单位应当根据会计业务的需要，设置会计机构，或者在有关机构中设置会计人员并指定会计主管人员；不具备设置条件的，应当委托经批准设立从事会计代理记账业务的中介机构代理记账。"},
+            {id:44,type:"单选",point:"公司法",text:"公司合并时，合并各方的债权、债务如何处理？",options:{A:"由合并后存续的公司承继",B:"由合并后新设的公司承继",C:"A 或 B",D:"自行消灭"},answer:"C",explanation:"公司合并时，合并各方的债权、债务，应当由合并后存续的公司或者新设的公司承继。"},
+            {id:45,type:"多选",point:"票据法",text:"下列各项中，属于汇票绝对记载事项的有？",options:{A:"表明\"汇票\"的字样",B:"无条件支付的委托",C:"确定的金额",D:"付款人名称"},answer:"ABCD",explanation:"汇票绝对记载事项包括：表明\"汇票\"的字样、无条件支付的委托、确定的金额、付款人名称、收款人名称、出票日期、出票人签章。"},
+            {id:46,type:"判断",point:"合同法",text:"当事人既约定违约金，又约定定金的，一方违约时，对方可以选择适用违约金或者定金条款。",answer:"正确",explanation:"当事人既约定违约金，又约定定金的，一方违约时，对方可以选择适用违约金或者定金条款，但二者不能并用。"},
+            {id:47,type:"单选",point:"支付结算",text:"临时存款账户的有效期最长不得超过？",options:{A:"6 个月",B:"1 年",C:"2 年",D:"3 年"},answer:"C",explanation:"临时存款账户的有效期最长不得超过 2 年。"},
+            {id:48,type:"多选",point:"增值税",text:"下列各项中，属于增值税视同销售行为的有？",options:{A:"将自产货物用于集体福利",B:"将外购货物用于个人消费",C:"将自产货物无偿赠送他人",D:"将委托加工货物用于投资"},answer:"ACD",explanation:"将自产、委托加工的货物用于集体福利、个人消费、无偿赠送、投资等，视同销售。外购货物用于集体福利、个人消费不视同销售。"},
+            {id:49,type:"判断",point:"所得税",text:"个体工商户业主的工资薪金支出，不得在个人所得税前扣除。",answer:"正确",explanation:"个体工商户业主的工资薪金支出不得在税前扣除，但可以扣除生计费（每月 5000 元）。"},
+            {id:50,type:"单选",point:"会计法律制度",text:"下列各项中，不属于会计工作岗位的是？",options:{A:"出纳",B:"稽核",C:"会计机构负责人",D:"审计"},answer:"D",explanation:"审计岗位不属于会计工作岗位。会计工作岗位包括：出纳、稽核、资本基金核算、收入支出核算、债权债务核算等。"}
         ];
         
         let userAnswers = { accounting: {}, economy: {} };
         let scores = { accounting: 0, economy: 0 };
         let answeredCount = { accounting: 0, economy: 0 };
+        let wrongQuestions = { accounting: [], economy: [] };
         
         function renderQuestions(questions, containerId, subject) {
             const container = document.getElementById(containerId);
@@ -425,26 +520,29 @@
                 scores[subject]++;
                 userAnswers[subject][index + '_scored'] = true;
                 updateTotalScore();
+            } else if (!correct && !wrongQuestions[subject].includes(index)) {
+                wrongQuestions[subject].push(index);
             }
         }
         
         function updateTotalScore() {
             document.getElementById('accounting-score').textContent = scores.accounting;
             document.getElementById('economy-score').textContent = scores.economy;
-            document.getElementById('total-score').textContent = `${scores.accounting + scores.economy} / 50`;
+            document.getElementById('total-score').textContent = `${scores.accounting + scores.economy} / 100`;
             
             const total = scores.accounting + scores.economy;
             let level = '';
-            if (total >= 45) level = '⭐ 优秀 (90%+)';
-            else if (total >= 38) level = '✅ 良好 (75%+)';
-            else if (total >= 30) level = '📖 合格 (60%+)';
+            if (total >= 90) level = '⭐ 优秀 (90%+)';
+            else if (total >= 75) level = '✅ 良好 (75%+)';
+            else if (total >= 60) level = '📖 合格 (60%+)';
             else level = '💪 需要加强 (<60%)';
             document.getElementById('score-level').textContent = level;
         }
         
         function updateProgress(subject) {
             const answered = Object.keys(userAnswers[subject]).filter(k => !k.includes('_scored')).length;
-            const percentage = (answered / 25) * 100;
+            const total = subject === 'accounting' ? 50 : 50;
+            const percentage = (answered / total) * 100;
             document.getElementById(`${subject}-progress`).style.width = `${percentage}%`;
         }
         
@@ -454,10 +552,12 @@
             const totalAnswered = accAnswered + ecoAnswered;
             const totalCorrect = scores.accounting + scores.economy;
             const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+            const remaining = 100 - totalAnswered;
             
             document.getElementById('total-answered').textContent = totalAnswered;
             document.getElementById('total-correct').textContent = totalCorrect;
             document.getElementById('accuracy-rate').textContent = accuracy + '%';
+            document.getElementById('remaining').textContent = remaining;
         }
         
         function showSection(sectionId) {
@@ -478,10 +578,33 @@
             });
         }
         
+        function startPractice(subject, mode) {
+            let questions = subject === 'accounting' ? accountingQuestions : economyQuestions;
+            
+            if (mode === 'random') {
+                questions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+            } else if (mode === 'weak') {
+                const wrongIds = wrongQuestions[subject];
+                if (wrongIds.length === 0) {
+                    alert('太棒了！还没有错题，先做全部练习吧！');
+                    return;
+                }
+                questions = questions.filter((q, index) => wrongIds.includes(index));
+            }
+            
+            renderQuestions(questions, `${subject}-questions`, subject);
+            userAnswers[subject] = {};
+            scores[subject] = 0;
+            wrongQuestions[subject] = [];
+            document.getElementById(`${subject}-progress`).style.width = '0%';
+            updateStats();
+            showSection(subject);
+        }
+        
         function resetAll() {
             userAnswers = { accounting: {}, economy: {} };
             scores = { accounting: 0, economy: 0 };
-            answeredCount = { accounting: 0, economy: 0 };
+            wrongQuestions = { accounting: [], economy: [] };
             document.getElementById('accounting-progress').style.width = '0%';
             document.getElementById('economy-progress').style.width = '0%';
             updateTotalScore();
