@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初级会计职称考试 - 练习自测系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 24px; font-weight: bold; color: #667eea; }
+        .stat-label { font-size: 12px; color: #6c757d; }
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+        .nav-tab:hover { background: #e9ecef; }
+        .nav-tab.active { background: white; color: #667eea; border-bottom: 3px solid #667eea; }
+        .content { padding: 30px; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .question-type {
+            background: #e9ecef;
+            color: #6c757d;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .question-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #212529;
+            margin-bottom: 20px;
+        }
+        .options { list-style: none; }
+        .option {
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .option:hover { border-color: #667eea; background: #f0f0ff; }
+        .option.selected { border-color: #667eea; background: #667eea; color: white; }
+        .option.correct { border-color: #28a745; background: #28a745; color: white; }
+        .option.incorrect { border-color: #dc3545; background: #dc3545; color: white; }
+        .option-label {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 600;
+        }
+        .option.selected .option-label { background: white; color: #667eea; }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5568d3; transform: translateY(-2px); }
+        .btn-success { background: #28a745; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .explanation {
+            display: none;
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #2e7d32; margin-bottom: 10px; }
+        .explanation p { color: #1b5e20; line-height: 1.6; }
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .score-number { font-size: 48px; font-weight: bold; margin: 10px 0; }
+        .score-level { font-size: 20px; opacity: 0.9; }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+        }
+        .knowledge-point {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-size: 13px;
+            color: #856404;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .action-buttons { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .chapter-filter {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .chapter-filter select {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 22px; }
+            .question-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 初级会计职称考试</h1>
+            <p>练习自测系统 - 2026 年复习资料（50 题完整版）</p>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="total-answered">0</div>
+                <div class="stat-label">已答题</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="total-correct">0</div>
+                <div class="stat-label">正确数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="accuracy-rate">0%</div>
+                <div class="stat-label">正确率</div>
+            </div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('accounting')">💰 会计实务 (25 题)</button>
+            <button class="nav-tab" onclick="showSection('economy')">⚖️ 经济法 (25 题)</button>
+            <button class="nav-tab" onclick="showSection('summary')">📊 答题统计</button>
+        </div>
+        
+        <div class="content">
+            <div id="accounting" class="section active">
+                <div class="chapter-filter">
+                    <label>📌 按章节筛选：</label>
+                    <select onchange="filterQuestions('accounting', this.value)">
+                        <option value="all">全部章节</option>
+                        <option value="会计要素">会计要素</option>
+                        <option value="会计科目">会计科目</option>
+                        <option value="借贷记账法">借贷记账法</option>
+                        <option value="资产">资产</option>
+                        <option value="负债">负债</option>
+                        <option value="所有者权益">所有者权益</option>
+                        <option value="收入费用">收入费用</option>
+                        <option value="财务报表">财务报表</option>
+                    </select>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" id="accounting-progress" style="width: 0%"></div></div>
+                <div id="accounting-questions"></div>
+            </div>
+            
+            <div id="economy" class="section">
+                <div class="chapter-filter">
+                    <label>📌 按章节筛选：</label>
+                    <select onchange="filterQuestions('economy', this.value)">
+                        <option value="all">全部章节</option>
+                        <option value="票据法">票据法</option>
+                        <option value="合同法">合同法</option>
+                        <option value="公司法">公司法</option>
+                        <option value="支付结算">支付结算</option>
+                        <option value="增值税">增值税</option>
+                        <option value="所得税">所得税</option>
+                        <option value="会计法律制度">会计法律制度</option>
+                    </select>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" id="economy-progress" style="width: 0%"></div></div>
+                <div id="economy-questions"></div>
+            </div>
+            
+            <div id="summary" class="section">
+                <div class="score-display">
+                    <div>总得分</div>
+                    <div class="score-number" id="total-score">0 / 50</div>
+                    <div class="score-level" id="score-level">开始答题吧！</div>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; color: #667eea;" id="accounting-score">0</div>
+                        <div style="color: #6c757d;">会计实务</div>
+                        <div style="font-size: 12px;">(25 题)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; color: #764ba2;" id="economy-score">0</div>
+                        <div style="color: #6c757d;">经济法</div>
+                        <div style="font-size: 12px;">(25 题)</div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="resetAll()">🔄 重新开始</button>
+                    <button class="btn btn-success" onclick="showSection('accounting')">📝 继续练习</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const accountingQuestions = [
+            {id:1,type:"单选",point:"会计要素",text:"下列属于企业资产要素的是？",options:{A:"实收资本",B:"应付账款",C:"银行存款",D:"未分配利润"},answer:"C",explanation:"银行存款属于资产要素，实收资本和未分配利润属于所有者权益，应付账款属于负债。"},
+            {id:2,type:"单选",point:"借贷记账法",text:"借贷记账法的记账规则是？",options:{A:"有借必有贷，借贷必相等",B:"借方增加，贷方减少",C:"资产在借方，负债在贷方",D:"收入增加记借方"},answer:"A",explanation:"借贷记账法的基本规则是：有借必有贷，借贷必相等。"},
+            {id:3,type:"单选",point:"固定资产",text:"下列不属于固定资产折旧方法的是？",options:{A:"年限平均法",B:"工作量法",C:"年数总和法",D:"直接法"},answer:"D",explanation:"固定资产折旧方法包括：年限平均法、工作量法、双倍余额递减法、年数总和法等。"},
+            {id:4,type:"单选",point:"会计科目",text:"\"管理费用\"科目属于什么类科目？",options:{A:"资产类",B:"负债类",C:"损益类",D:"成本类"},answer:"C",explanation:"管理费用属于损益类科目中的费用类科目。"},
+            {id:5,type:"单选",point:"财务报表",text:"资产负债表反映的是企业在特定日期的？",options:{A:"经营成果",B:"现金流量",C:"财务状况",D:"所有者权益变动"},answer:"C",explanation:"资产负债表反映企业在某一特定日期的财务状况。"},
+            {id:6,type:"单选",point:"财务报表",text:"利润表反映企业在一定期间的？",options:{A:"财务状况",B:"现金流量",C:"经营成果",D:"所有者权益变动"},answer:"C",explanation:"利润表反映企业在一定期间的经营成果。"},
+            {id:7,type:"多选",point:"会计基本假设",text:"会计基本假设包括？",options:{A:"会计主体",B:"持续经营",C:"会计分期",D:"货币计量"},answer:"ABCD",explanation:"会计基本假设包括：会计主体、持续经营、会计分期、货币计量。"},
+            {id:8,type:"多选",point:"货币资金",text:"下列属于货币资金的有？",options:{A:"库存现金",B:"银行存款",C:"其他货币资金",D:"应收账款"},answer:"ABC",explanation:"货币资金包括：库存现金、银行存款、其他货币资金。应收账款属于债权资产。"},
+            {id:9,type:"判断",point:"收入确认",text:"企业销售商品只要收到款项就可以确认收入。",answer:"错误",explanation:"收入确认需要同时满足五个条件：合同已签订、商品所有权转移、经济利益很可能流入、企业成本能够可靠计量。"},
+            {id:10,type:"判断",point:"存货计价",text:"发出存货的计价方法一旦确定，不得变更。",answer:"错误",explanation:"发出存货的计价方法可以根据实际情况变更，但需要在会计报表中披露变更情况。"},
+            {id:11,type:"单选",point:"资产",text:"下列各项中，属于流动资产的是？",options:{A:"固定资产",B:"无形资产",C:"存货",D:"长期股权投资"},answer:"C",explanation:"存货属于流动资产，固定资产、无形资产、长期股权投资属于非流动资产。"},
+            {id:12,type:"单选",point:"负债",text:"下列各项中，属于流动负债的是？",options:{A:"长期借款",B:"应付债券",C:"应付账款",D:"长期应付款"},answer:"C",explanation:"应付账款属于流动负债，其他三项属于非流动负债。"},
+            {id:13,type:"单选",point:"所有者权益",text:"下列各项中，不属于所有者权益的是？",options:{A:"实收资本",B:"资本公积",C:"盈余公积",D:"长期股权投资"},answer:"D",explanation:"长期股权投资属于资产，不属于所有者权益。"},
+            {id:14,type:"多选",point:"收入",text:"下列各项中，属于收入的有？",options:{A:"销售商品收入",B:"提供劳务收入",C:"让渡资产使用权收入",D:"营业外收入"},answer:"ABC",explanation:"收入包括销售商品收入、提供劳务收入、让渡资产使用权收入。营业外收入不属于收入要素。"},
+            {id:15,type:"单选",point:"会计等式",text:"最基本的会计等式是？",options:{A:"资产=负债 + 所有者权益",B:"收入 - 费用=利润",C:"资产=权益",D:"资产 + 费用=负债 + 所有者权益 + 收入"},answer:"A",explanation:"资产=负债 + 所有者权益是最基本的会计等式，也称为静态会计等式。"},
+            {id:16,type:"判断",point:"会计科目",text:"\"累计折旧\"科目是资产类科目，但属于资产的备抵科目。",answer:"正确",explanation:"累计折旧是固定资产的备抵科目，借方登记减少，贷方登记增加，余额在贷方。"},
+            {id:17,type:"单选",point:"资产",text:"企业购入不需要安装的设备一台，应借记的科目是？",options:{A:"在建工程",B:"固定资产",C:"制造费用",D:"管理费用"},answer:"B",explanation:"购入不需要安装的固定资产，直接借记\"固定资产\"科目。"},
+            {id:18,type:"单选",point:"费用",text:"下列各项中，应计入产品成本的是？",options:{A:"管理费用",B:"销售费用",C:"财务费用",D:"制造费用"},answer:"D",explanation:"制造费用应计入产品成本，其他三项属于期间费用。"},
+            {id:19,type:"多选",point:"会计凭证",text:"会计凭证按照填制程序和用途可分为？",options:{A:"原始凭证",B:"记账凭证",C:"收款凭证",D:"付款凭证"},answer:"AB",explanation:"会计凭证按填制程序和用途分为原始凭证和记账凭证。收款凭证和付款凭证是记账凭证的进一步分类。"},
+            {id:20,type:"判断",point:"会计账簿",text:"总分类账和明细分类账必须平行登记。",answer:"正确",explanation:"总分类账和明细分类账平行登记要求：依据相同、方向相同、期间相同、金额相等。"},
+            {id:21,type:"单选",point:"资产",text:"下列各项中，不应计入存货成本的是？",options:{A:"购买价款",B:"相关税费",C:"运输费",D:"非正常损耗"},answer:"D",explanation:"非正常损耗不计入存货成本，应计入当期损益。"},
+            {id:22,type:"单选",point:"固定资产",text:"固定资产折旧应计入的科目是？",options:{A:"管理费用",B:"制造费用",C:"根据用途计入不同科目",D:"销售费用"},answer:"C",explanation:"固定资产折旧根据用途计入不同科目：管理部门用计入管理费用，生产车间用计入制造费用，销售部门用计入销售费用。"},
+            {id:23,type:"多选",point:"财务报表",text:"下列属于财务报表的有？",options:{A:"资产负债表",B:"利润表",C:"现金流量表",D:"所有者权益变动表"},answer:"ABCD",explanation:"财务报表包括：资产负债表、利润表、现金流量表、所有者权益变动表及附注。"},
+            {id:24,type:"判断",point:"会计信息质量",text:"会计信息质量要求中的可比性要求同一企业不同时期发生的相同交易应采用一致的会计政策。",answer:"正确",explanation:"可比性要求同一企业不同时期可比（纵向可比），不同企业相同会计期间可比（横向可比）。"},
+            {id:25,type:"单选",point:"会计要素",text:"下列各项中，属于反映企业经营成果的会计要素是？",options:{A:"资产",B:"负债",C:"所有者权益",D:"利润"},answer:"D",explanation:"反映经营成果的会计要素包括：收入、费用、利润。资产、负债、所有者权益反映财务状况。"}
+        ];
+        
+        const economyQuestions = [
+            {id:1,type:"单选",point:"票据法",text:"票据的付款期限最长不得超过？",options:{A:"3 个月",B:"6 个月",C:"9 个月",D:"1 年"},answer:"B",explanation:"票据的付款期限最长不得超过 6 个月。"},
+            {id:2,type:"单选",point:"票据法",text:"下列不属于票据基本当事人的是？",options:{A:"出票人",B:"收款人",C:"付款人",D:"背书人"},answer:"D",explanation:"票据基本当事人包括：出票人、收款人、付款人。背书人是非基本当事人。"},
+            {id:3,type:"单选",point:"合同法",text:"合同生效后，当事人对合同条款理解有争议的，应当？",options:{A:"按合同字面意思理解",B:"按交易习惯确定",C:"由法院判决",D:"视为合同无效"},answer:"B",explanation:"合同生效后，当事人对合同条款理解有争议的，应当按照合同所使用的词句、合同的相关条款、交易习惯等确定。"},
+            {id:4,type:"判断",point:"合同法",text:"要约可以撤回，但不得撤销。",answer:"错误",explanation:"要约可以撤回，也可以撤销。但要约人确定了承诺期限或者以其他方式明示不可撤销的，不得撤销。"},
+            {id:5,type:"多选",point:"公司法",text:"公司解散的原因包括？",options:{A:"公司章程规定的营业期限届满",B:"股东会决议解散",C:"依法被吊销营业执照",D:"公司合并或分立"},answer:"ABCD",explanation:"公司解散的原因包括：公司章程规定的营业期限届满、股东会决议解散、依法被吊销营业执照、公司合并或分立等。"},
+            {id:6,type:"单选",point:"支付结算",text:"银行汇票的提示付款期限为？",options:{A:"10 天",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"B",explanation:"银行汇票的提示付款期限为 1 个月。"},
+            {id:7,type:"单选",point:"票据法",text:"下列关于支票的说法正确的是？",options:{A:"支票可以透支",B:"支票的付款人是银行",C:"支票没有金额限制",D:"支票可以背书转让多次"},answer:"B",explanation:"支票的付款人必须是银行。支票不得透支，有金额起点限制。"},
+            {id:8,type:"判断",point:"增值税",text:"小规模纳税人可以自行开具增值税专用发票。",answer:"错误",explanation:"小规模纳税人不能自行开具增值税专用发票，需要向税务机关申请代开。"},
+            {id:9,type:"多选",point:"所得税",text:"下列各项中，不得在企业所得税前扣除的有？",options:{A:"税收滞纳金",B:"赞助支出",C:"工资薪金",D:"罚款支出"},answer:"ABD",explanation:"税收滞纳金、赞助支出、罚款支出不得在企业所得税前扣除。工资薪金可以按规定扣除。"},
+            {id:10,type:"单选",point:"会计法律制度",text:"伪造会计凭证、会计账簿，情节严重的，会计人员几年内不得从事会计工作？",options:{A:"3 年",B:"5 年",C:"10 年",D:"终身"},answer:"B",explanation:"伪造会计凭证、会计账簿，情节严重的，会计人员 5 年内不得从事会计工作。"},
+            {id:11,type:"单选",point:"票据法",text:"商业汇票的承兑期限最长不得超过？",options:{A:"3 个月",B:"6 个月",C:"9 个月",D:"1 年"},answer:"B",explanation:"商业汇票的承兑期限最长不得超过 6 个月。"},
+            {id:12,type:"单选",point:"合同法",text:"下列合同中，属于无效合同的是？",options:{A:"一方以欺诈手段订立的合同",B:"恶意串通损害国家利益的合同",C:"重大误解订立的合同",D:"显失公平的合同"},answer:"B",explanation:"恶意串通损害国家、集体或第三人利益的合同属于无效合同。其他三项属于可撤销合同。"},
+            {id:13,type:"判断",point:"公司法",text:"有限责任公司的股东以其认缴的出资额为限对公司承担责任。",answer:"正确",explanation:"有限责任公司股东以其认缴的出资额为限对公司承担责任；股份有限公司股东以其认购的股份为限对公司承担责任。"},
+            {id:14,type:"多选",point:"支付结算",text:"下列属于支付结算方式的有？",options:{A:"票据",B:"银行卡",C:"汇兑",D:"托收承付"},answer:"ABCD",explanation:"支付结算方式包括：票据、银行卡、汇兑、托收承付、委托收款、电子支付等。"},
+            {id:15,type:"单选",point:"增值税",text:"增值税小规模纳税人的征收率为？",options:{A:"3%",B:"6%",C:"9%",D:"13%"},answer:"A",explanation:"增值税小规模纳税人征收率为 3%（疫情期间有优惠政策）。"},
+            {id:16,type:"单选",point:"所得税",text:"企业所得税的法定税率为？",options:{A:"15%",B:"20%",C:"25%",D:"30%"},answer:"C",explanation:"企业所得税法定税率为 25%。符合条件的小型微利企业适用 20% 税率。"},
+            {id:17,type:"判断",point:"会计法律制度",text:"会计档案的保管期限分为永久和定期两类。",answer:"正确",explanation:"会计档案保管期限分为永久和定期两类，定期保管期限一般分为 10 年和 30 年。"},
+            {id:18,type:"多选",point:"票据法",text:"下列各项中，属于票据行为的有？",options:{A:"出票",B:"背书",C:"承兑",D:"保证"},answer:"ABCD",explanation:"票据行为包括：出票、背书、承兑、保证。"},
+            {id:19,type:"单选",point:"合同法",text:"当事人一方不履行合同义务，应当承担的违约责任不包括？",options:{A:"继续履行",B:"采取补救措施",C:"赔偿损失",D:"支付定金"},answer:"D",explanation:"违约责任包括：继续履行、采取补救措施、赔偿损失、支付违约金等。支付定金不是违约责任形式。"},
+            {id:20,type:"判断",point:"公司法",text:"一人有限责任公司的股东不能证明公司财产独立于股东自己财产的，应当对公司债务承担连带责任。",answer:"正确",explanation:"一人有限责任公司股东不能证明公司财产独立的，适用\"法人人格否认\"制度，对公司债务承担连带责任。"},
+            {id:21,type:"单选",point:"增值税",text:"下列各项中，不属于增值税征税范围的是？",options:{A:"销售货物",B:"提供加工修理修配劳务",C:"销售服务",D:"转让无形资产使用权"},answer:"D",explanation:"转让无形资产使用权属于营业税征税范围（营改增前），营改增后销售无形资产属于增值税征税范围，但\"使用权\"表述不准确。"},
+            {id:22,type:"单选",point:"支付结算",text:"单位人民币卡账户的资金一律从其什么转账存入？",options:{A:"基本存款账户",B:"一般存款账户",C:"专用存款账户",D:"临时存款账户"},answer:"A",explanation:"单位人民币卡账户的资金一律从其基本存款账户转账存入，不得存取现金。"},
+            {id:23,type:"多选",point:"会计法律制度",text:"下列各项中，属于会计职业道德内容的有？",options:{A:"爱岗敬业",B:"诚实守信",C:"廉洁自律",D:"客观公正"},answer:"ABCD",explanation:"会计职业道德包括：爱岗敬业、诚实守信、廉洁自律、客观公正、坚持准则、提高技能、参与管理、强化服务。"},
+            {id:24,type:"判断",point:"合同法",text:"格式条款与非格式条款不一致的，应当采用非格式条款。",answer:"正确",explanation:"格式条款与非格式条款不一致的，应当采用非格式条款，这是保护弱势一方利益的原则。"},
+            {id:25,type:"单选",point:"公司法",text:"有限责任公司股东会作出修改公司章程的决议，必须经代表多少表决权的股东通过？",options:{A:"1/2 以上",B:"2/3 以上",C:"3/4 以上",D:"全体"},answer:"B",explanation:"修改公司章程、增减注册资本、合并分立解散等重大事项，必须经代表 2/3 以上表决权的股东通过。"}
+        ];
+        
+        let userAnswers = { accounting: {}, economy: {} };
+        let scores = { accounting: 0, economy: 0 };
+        let answeredCount = { accounting: 0, economy: 0 };
+        
+        function renderQuestions(questions, containerId, subject) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="${subject}-q${index}" data-point="${q.point}">
+                    <div class="question-header">
+                        <span class="question-number">第${index + 1}题</span>
+                        <span class="question-type">${q.type}</span>
+                    </div>
+                    <div class="knowledge-point">📌 ${q.point}</div>
+                    <div class="question-text">${q.text}</div>
+                    <ul class="options">${renderOptions(q, subject, index)}</ul>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="checkAnswer('${subject}', ${index})">✅ 提交答案</button>
+                        <button class="btn btn-info" onclick="showExplanation('${subject}', ${index})" style="display:none;" id="${subject}-explain-btn${index}">📖 查看解析</button>
+                    </div>
+                    <div class="explanation" id="${subject}-explain${index}">
+                        <h4>✅ 正确答案：${q.answer}</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderOptions(q, subject, index) {
+            if (q.type === "判断") {
+                return `<li class="option" onclick="selectOption('${subject}', ${index}, '正确', this)"><span class="option-label">✓</span><span>正确</span></li>
+                        <li class="option" onclick="selectOption('${subject}', ${index}, '错误', this)"><span class="option-label">✗</span><span>错误</span></li>`;
+            } else {
+                return Object.entries(q.options).map(([key, value]) => 
+                    `<li class="option" onclick="selectOption('${subject}', ${index}, '${key}', this)"><span class="option-label">${key}</span><span>${value}</span></li>`
+                ).join('');
+            }
+        }
+        
+        function selectOption(subject, index, answer, element) {
+            const container = document.getElementById(`${subject}-q${index}`);
+            container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            userAnswers[subject][index] = answer;
+        }
+        
+        function checkAnswer(subject, index) {
+            const userAnswer = userAnswers[subject][index];
+            if (!userAnswer) { alert('请先选择一个答案！'); return; }
+            
+            const questions = subject === 'accounting' ? accountingQuestions : economyQuestions;
+            const question = questions[index];
+            const card = document.getElementById(`${subject}-q${index}`);
+            const options = card.querySelectorAll('.option');
+            
+            options.forEach(opt => {
+                const label = opt.querySelector('.option-label').textContent;
+                if (label === question.answer) opt.classList.add('correct');
+                else if (label === userAnswer && userAnswer !== question.answer) opt.classList.add('incorrect');
+            });
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            document.getElementById(`${subject}-explain-btn${index}`).style.display = 'inline-block';
+            updateScore(subject, index, userAnswer === question.answer);
+            updateProgress(subject);
+            updateStats();
+        }
+        
+        function showExplanation(subject, index) {
+            document.getElementById(`${subject}-explain${index}`).classList.toggle('show');
+        }
+        
+        function updateScore(subject, index, correct) {
+            if (correct && !userAnswers[subject][index + '_scored']) {
+                scores[subject]++;
+                userAnswers[subject][index + '_scored'] = true;
+                updateTotalScore();
+            }
+        }
+        
+        function updateTotalScore() {
+            document.getElementById('accounting-score').textContent = scores.accounting;
+            document.getElementById('economy-score').textContent = scores.economy;
+            document.getElementById('total-score').textContent = `${scores.accounting + scores.economy} / 50`;
+            
+            const total = scores.accounting + scores.economy;
+            let level = '';
+            if (total >= 45) level = '⭐ 优秀 (90%+)';
+            else if (total >= 38) level = '✅ 良好 (75%+)';
+            else if (total >= 30) level = '📖 合格 (60%+)';
+            else level = '💪 需要加强 (<60%)';
+            document.getElementById('score-level').textContent = level;
+        }
+        
+        function updateProgress(subject) {
+            const answered = Object.keys(userAnswers[subject]).filter(k => !k.includes('_scored')).length;
+            const percentage = (answered / 25) * 100;
+            document.getElementById(`${subject}-progress`).style.width = `${percentage}%`;
+        }
+        
+        function updateStats() {
+            const accAnswered = Object.keys(userAnswers.accounting).filter(k => !k.includes('_scored')).length;
+            const ecoAnswered = Object.keys(userAnswers.economy).filter(k => !k.includes('_scored')).length;
+            const totalAnswered = accAnswered + ecoAnswered;
+            const totalCorrect = scores.accounting + scores.economy;
+            const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+            
+            document.getElementById('total-answered').textContent = totalAnswered;
+            document.getElementById('total-correct').textContent = totalCorrect;
+            document.getElementById('accuracy-rate').textContent = accuracy + '%';
+        }
+        
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function filterQuestions(subject, point) {
+            const cards = document.querySelectorAll(`#${subject}-questions .question-card`);
+            cards.forEach(card => {
+                if (point === 'all' || card.dataset.point === point) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        function resetAll() {
+            userAnswers = { accounting: {}, economy: {} };
+            scores = { accounting: 0, economy: 0 };
+            answeredCount = { accounting: 0, economy: 0 };
+            document.getElementById('accounting-progress').style.width = '0%';
+            document.getElementById('economy-progress').style.width = '0%';
+            updateTotalScore();
+            updateStats();
+            renderQuestions(accountingQuestions, 'accounting-questions', 'accounting');
+            renderQuestions(economyQuestions, 'economy-questions', 'economy');
+            showSection('accounting');
+        }
+        
+        renderQuestions(accountingQuestions, 'accounting-questions', 'accounting');
+        renderQuestions(economyQuestions, 'economy-questions', 'economy');
+    </script>
+</body>
+</html>
