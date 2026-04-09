@@ -507,9 +507,23 @@
         
         function selectOption(subject, index, answer, element) {
             const container = document.getElementById(`${subject}-q${index}`);
-            container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            userAnswers[subject][index] = answer;
+            const questions = subject === 'accounting' ? accountingQuestions : economyQuestions;
+            const question = questions[index];
+            const isMulti = question.type === '多选';
+            
+            if (isMulti) {
+                // 多选题：切换选中状态
+                element.classList.toggle('selected');
+                // 获取所有选中的选项
+                const selected = Array.from(container.querySelectorAll('.option.selected'))
+                    .map(opt => opt.querySelector('.option-label').textContent);
+                userAnswers[subject][index] = selected.join('');
+            } else {
+                // 单选题：清除其他选项，只保留当前选中
+                container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                element.classList.add('selected');
+                userAnswers[subject][index] = answer;
+            }
         }
         
         function checkAnswer(subject, index) {
