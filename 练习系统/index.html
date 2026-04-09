@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初级会计职称考试 - 练习自测系统（会计 50 题 + 经济法 50 题）</title>
+    <title>初级会计职称考试 - 练习自测系统（会计 50 题 + 经济法 100 题）</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -235,7 +235,7 @@
     <div class="container">
         <div class="header">
             <h1>📚 初级会计职称考试</h1>
-            <p>练习自测系统 - 2026 年复习资料（会计 50 题 + 经济法 50 题）</p>
+            <p>练习自测系统 - 2026 年复习资料（会计 50 题 + 经济法 100 题）</p>
             <div class="badge-container">
                 <span class="badge">💰 会计实务 150 题</span>
                 <span class="badge">⚖️ 经济法 150 题</span>
@@ -258,7 +258,7 @@
                 <div class="stat-label">正确率</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="remaining">105</div>
+                <div class="stat-number" id="remaining">150</div>
                 <div class="stat-label">剩余题</div>
             </div>
         </div>
@@ -324,7 +324,7 @@
             <div id="summary" class="section">
                 <div class="score-display">
                     <div>总得分</div>
-                    <div class="score-number" id="total-score">0 / 105</div>
+                    <div class="score-number" id="total-score">0 / 150</div>
                     <div class="score-level" id="score-level">开始答题吧！</div>
                 </div>
                 <div style="display: flex; justify-content: space-around; margin: 20px 0;">
@@ -460,9 +460,104 @@
             {id:2,type:"单选",point:"支付结算",difficulty:"easy",text:"下列不属于票据基本当事人的是？",options:{A:"出票人",B:"收款人",C:"付款人",D:"背书人"},answer:"D",explanation:"票据基本当事人包括出票人、收款人、付款人。"},
             {id:3,type:"单选",point:"劳动合同",difficulty:"medium",text:"合同生效后，当事人对合同条款理解有争议的，应当？",options:{A:"按合同字面意思理解",B:"按交易习惯确定",C:"由法院判决",D:"视为合同无效"},answer:"B",explanation:"按交易习惯确定。"},
             {id:4,type:"判断",point:"劳动合同",difficulty:"medium",text:"要约可以撤回，但不得撤销。",answer:"错误",explanation:"要约可以撤回也可以撤销。"},
-            {id:5,type:"多选",point:"会计法律制度",difficulty:"medium",text:"公司解散的原因包括？",options:{A:"公司章程规定的营业期限届满",B:"股东会决议解散",C:"依法被吊销营业执照",D:"公司合并或分立"},answer:"ABCD",explanation:"这些都是公司解散原因。"}
+            {id:5,type:"多选",point:"会计法律制度",difficulty:"medium",text:"公司解散的原因包括？",options:{A:"公司章程规定的营业期限届满",B:"股东会决议解散",C:"依法被吊销营业执照",D:"公司合并或分立"},answer:"ABCD",explanation:"这些都是公司解散原因。"},
+            {id:6,type:"单选",point:"支付结算",difficulty:"easy",text:"银行汇票的提示付款期限为？",options:{A:"10 天",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"B",explanation:"银行汇票的提示付款期限为 1 个月。"},
+            {id:7,type:"单选",point:"票据法",difficulty:"medium",text:"下列关于支票的说法正确的是？",options:{A:"支票可以透支",B:"支票的付款人是银行",C:"支票没有金额限制",D:"支票可以背书转让多次"},answer:"B",explanation:"支票的付款人必须是银行。"},
+            {id:8,type:"判断",point:"增值税",difficulty:"easy",text:"增值税小规模纳税人不得抵扣进项税额。",answer:"正确",explanation:"小规模纳税人采用简易计税方法，不得抵扣进项税额。"},
+            {id:9,type:"多选",point:"消费税",difficulty:"medium",text:"下列各项中，属于消费税征税范围的有？",options:{A:"烟",B:"酒",C:"高档化妆品",D:"成品油"},answer:"ABCD",explanation:"消费税征税范围包括烟、酒、高档化妆品、成品油等 15 类消费品。"},
+            {id:10,type:"单选",point:"企业所得税",difficulty:"easy",text:"企业所得税的税率为？",options:{A:"15%",B:"20%",C:"25%",D:"30%"},answer:"C",explanation:"企业所得税的基本税率为 25%。"},
+            {id:11,type:"单选",point:"劳动合同法",difficulty:"medium",text:"劳动合同期限三个月以上不满一年的，试用期不得超过？",options:{A:"15 天",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"B",explanation:"劳动合同期限三个月以上不满一年的，试用期不得超过 1 个月。"},
+            {id:12,type:"判断",point:"支付结算",difficulty:"easy",text:"单位人民币卡可以透支。",answer:"错误",explanation:"单位人民币卡不得透支。"},
+            {id:13,type:"多选",point:"增值税",difficulty:"medium",text:"下列各项中，属于增值税征税范围的有？",options:{A:"销售货物",B:"提供加工修理修配劳务",C:"销售服务",D:"进口货物"},answer:"ABCD",explanation:"增值税征税范围包括销售货物、提供加工修理修配劳务、销售服务、无形资产、不动产以及进口货物。"},
+            {id:14,type:"单选",point:"会计法律制度",difficulty:"easy",text:"《会计法》规定，各单位应当依法设置？",options:{A:"会计账簿",B:"会计机构",C:"会计人员",D:"以上都是"},answer:"D",explanation:"《会计法》规定各单位应当依法设置会计账簿、会计机构、配备会计人员。"},
+            {id:15,type:"判断",point:"票据法",difficulty:"medium",text:"票据金额以中文大写和数码同时记载，二者必须一致。",answer:"正确",explanation:"票据金额以中文大写和数码同时记载，二者必须一致，二者不一致的，票据无效。"},
+            {id:16,type:"单选",point:"个人所得税",difficulty:"medium",text:"下列各项中，属于个人所得税居民纳税人的是？",options:{A:"在中国境内有住所的个人",B:"无住所而一个纳税年度内在中国境内居住累计满 183 天的个人",C:"A 和 B 都是",D:"A 和 B 都不是"},answer:"C",explanation:"在中国境内有住所，或者无住所而一个纳税年度内在中国境内居住累计满 183 天的个人，为居民个人。"},
+            {id:17,type:"多选",point:"劳动合同法",difficulty:"hard",text:"下列各项中，用人单位可以解除劳动合同的情形有？",options:{A:"劳动者严重违反用人单位的规章制度",B:"劳动者严重失职，营私舞弊，给用人单位造成重大损害",C:"劳动者被依法追究刑事责任",D:"劳动者患病医疗期满后不能从事原工作"},answer:"ABC",explanation:"ABC 属于用人单位可以单方解除劳动合同的情形。"},
+            {id:18,type:"单选",point:"支付结算",difficulty:"easy",text:"下列各项中，属于银行结算账户的是？",options:{A:"基本存款账户",B:"一般存款账户",C:"专用存款账户",D:"以上都是"},answer:"D",explanation:"银行结算账户包括基本存款账户、一般存款账户、专用存款账户、临时存款账户。"},
+            {id:19,type:"判断",point:"企业所得税",difficulty:"medium",text:"企业发生的公益性捐赠支出，在年度利润总额 12% 以内的部分，准予扣除。",answer:"正确",explanation:"企业发生的公益性捐赠支出，在年度利润总额 12% 以内的部分，准予在计算应纳税所得额时扣除。"},
+            {id:20,type:"单选",point:"会计法律制度",difficulty:"easy",text:"下列各项中，属于会计工作岗位的是？",options:{A:"出纳",B:"稽核",C:"会计机构负责人",D:"以上都是"},answer:"D",explanation:"会计工作岗位包括出纳、稽核、会计机构负责人、会计核算等岗位。"},
+            {id:21,type:"多选",point:"票据法",difficulty:"medium",text:"下列各项中，属于票据权利的有？",options:{A:"付款请求权",B:"追索权",C:"抗辩权",D:"处分权"},answer:"AB",explanation:"票据权利包括付款请求权和追索权。"},
+            {id:22,type:"单选",point:"增值税",difficulty:"medium",text:"增值税一般纳税人销售货物适用的基本税率为？",options:{A:"9%",B:"13%",C:"6%",D:"3%"},answer:"B",explanation:"增值税一般纳税人销售货物、提供加工修理修配劳务的基本税率为 13%。"},
+            {id:23,type:"判断",point:"劳动合同法",difficulty:"easy",text:"同一用人单位与同一劳动者可以约定多次试用期。",answer:"错误",explanation:"同一用人单位与同一劳动者只能约定一次试用期。"},
+            {id:24,type:"单选",point:"消费税",difficulty:"hard",text:"下列各项中，实行从价定率和从量定额复合计税的是？",options:{A:"白酒",B:"卷烟",C:"A 和 B 都是",D:"A 和 B 都不是"},answer:"C",explanation:"卷烟和白酒实行从价定率和从量定额复合计税。"},
+            {id:25,type:"多选",point:"个人所得税",difficulty:"medium",text:"下列各项中，属于个人所得税综合所得的有？",options:{A:"工资薪金所得",B:"劳务报酬所得",C:"稿酬所得",D:"特许权使用费所得"},answer:"ABCD",explanation:"综合所得包括工资薪金所得、劳务报酬所得、稿酬所得、特许权使用费所得。"},
+            {id:26,type:"单选",point:"支付结算",difficulty:"medium",text:"下列各项中，可以支取现金的支票是？",options:{A:"现金支票",B:"转账支票",C:"普通支票",D:"A 和 C 都是"},answer:"D",explanation:"现金支票只能用于支取现金，普通支票可以用于支取现金也可以用于转账。"},
+            {id:27,type:"判断",point:"会计法律制度",difficulty:"medium",text:"会计档案的保管期限分为永久和定期两类。",answer:"正确",explanation:"会计档案的保管期限分为永久和定期两类，定期保管期限一般分为 10 年和 30 年。"},
+            {id:28,type:"单选",point:"企业所得税",difficulty:"hard",text:"下列各项中，不得在企业所得税前扣除的是？",options:{A:"税收滞纳金",B:"罚金",C:"罚款",D:"以上都是"},answer:"D",explanation:"税收滞纳金、罚金、罚款和被没收财物的损失不得在企业所得税前扣除。"},
+            {id:29,type:"多选",point:"支付结算",difficulty:"medium",text:"下列各项中，属于票据的是？",options:{A:"汇票",B:"本票",C:"支票",D:"股票"},answer:"ABC",explanation:"票据包括汇票、本票、支票。股票属于有价证券，不属于票据。"},
+            {id:30,type:"单选",point:"劳动合同法",difficulty:"medium",text:"劳动者提前多少日以书面形式通知用人单位，可以解除劳动合同？",options:{A:"15 日",B:"30 日",C:"45 日",D:"60 日"},answer:"B",explanation:"劳动者提前 30 日以书面形式通知用人单位，可以解除劳动合同。"},
+            {id:31,type:"判断",point:"增值税",difficulty:"medium",text:"小规模纳税人发生应税销售行为，实行简易计税方法。",answer:"正确",explanation:"小规模纳税人发生应税销售行为，实行简易计税方法，按照销售额和征收率计算应纳税额。"},
+            {id:32,type:"单选",point:"会计法律制度",difficulty:"easy",text:"下列各项中，负责主管全国会计工作的是？",options:{A:"财政部",B:"国家税务总局",C:"审计署",D:"银保监会"},answer:"A",explanation:"国务院财政部门主管全国的会计工作。"},
+            {id:33,type:"多选",point:"企业所得税",difficulty:"hard",text:"下列各项中，属于企业所得税免税收入的有？",options:{A:"国债利息收入",B:"符合条件的居民企业之间的股息、红利等权益性投资收益",C:"在中国境内设立机构、场所的非居民企业从居民企业取得与该机构、场所有实际联系的股息、红利等权益性投资收益",D:"符合条件的非营利组织的收入"},answer:"ABCD",explanation:"以上都属于企业所得税免税收入。"},
+            {id:34,type:"单选",point:"票据法",difficulty:"medium",text:"汇票的持票人应当自出票日起多长时间内提示付款？",options:{A:"10 日",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"B",explanation:"见票即付的汇票，持票人应当自出票日起 1 个月内向付款人提示付款。"},
+            {id:35,type:"判断",point:"个人所得税",difficulty:"medium",text:"居民个人从中国境外取得的所得，不用缴纳个人所得税。",answer:"错误",explanation:"居民个人从中国境内和境外取得的所得，依照本法规定缴纳个人所得税。"},
+            {id:36,type:"单选",point:"劳动合同法",difficulty:"medium",text:"下列各项中，经济补偿按劳动者在本单位工作的年限，每满一年支付的标准是？",options:{A:"半个月工资",B:"1 个月工资",C:"2 个月工资",D:"3 个月工资"},answer:"B",explanation:"经济补偿按劳动者在本单位工作的年限，每满 1 年支付 1 个月工资的标准向劳动者支付。"},
+            {id:37,type:"多选",point:"会计法律制度",difficulty:"hard",text:"下列各项中，属于会计监督的有？",options:{A:"单位内部会计监督",B:"会计工作的政府监督",C:"会计工作的社会监督",D:"媒体监督"},answer:"ABC",explanation:"会计监督包括单位内部会计监督、会计工作的政府监督、会计工作的社会监督。"},
+            {id:38,type:"单选",point:"支付结算",difficulty:"medium",text:"下列各项中，基本存款账户可以办理的业务是？",options:{A:"日常转账结算",B:"现金收付",C:"工资、奖金和现金的支取",D:"以上都是"},answer:"D",explanation:"基本存款账户是存款人的主办账户，可以办理日常转账结算和现金收付，以及工资、奖金和现金的支取。"},
+            {id:39,type:"判断",point:"消费税",difficulty:"easy",text:"消费税属于价内税。",answer:"正确",explanation:"消费税属于价内税，在计算增值税时，消费税应计入销售额。"},
+            {id:40,type:"单选",point:"企业所得税",difficulty:"hard",text:"企业纳税年度发生的亏损，准予向以后年度结转，但最长不得超过多少年？",options:{A:"3 年",B:"5 年",C:"8 年",D:"10 年"},answer:"B",explanation:"企业纳税年度发生的亏损，准予向以后年度结转，用以后年度的所得弥补，但结转年限最长不得超过 5 年。"},
+            {id:41,type:"多选",point:"劳动合同法",difficulty:"medium",text:"下列各项中，属于劳动合同必备条款的有？",options:{A:"用人单位的名称、住所和法定代表人",B:"劳动者的姓名、住址和居民身份证号码",C:"劳动合同期限",D:"工作内容和工作地点"},answer:"ABCD",explanation:"以上都属于劳动合同的必备条款。"},
+            {id:42,type:"单选",point:"增值税",difficulty:"medium",text:"下列各项中，适用 9% 增值税税率的是？",options:{A:"销售不动产",B:"交通运输服务",C:"建筑服务",D:"以上都是"},answer:"D",explanation:"销售不动产、交通运输服务、建筑服务、邮政服务、基础电信服务等适用 9% 增值税税率。"},
+            {id:43,type:"判断",point:"票据法",difficulty:"hard",text:"票据上有伪造、变造的签章的，不影响票据上其他真实签章的效力。",answer:"正确",explanation:"票据上有伪造、变造的签章的，不影响票据上其他真实签章的效力。"},
+            {id:44,type:"单选",point:"个人所得税",difficulty:"medium",text:"下列各项中，专项附加扣除不包括？",options:{A:"子女教育",B:"继续教育",C:"住房贷款利息",D:"商业保险"},answer:"D",explanation:"专项附加扣除包括子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人。商业保险不属于专项附加扣除。"},
+            {id:45,type:"多选",point:"支付结算",difficulty:"hard",text:"下列各项中，属于违反支付结算规定的行为有？",options:{A:"签发空头支票",B:"签发与预留印鉴不符的支票",C:"无理拒付",D:"正常转账"},answer:"ABC",explanation:"签发空头支票、签发与预留印鉴不符的支票、无理拒付都属于违反支付结算规定的行为。"},
+            {id:46,type:"单选",point:"会计法律制度",difficulty:"medium",text:"下列各项中，会计人员每年参加继续教育取得的学分不少于？",options:{A:"60 学分",B:"70 学分",C:"80 学分",D:"90 学分"},answer:"D",explanation:"会计人员每年参加继续教育取得的学分不少于 90 学分。"},
+            {id:47,type:"判断",point:"劳动合同法",difficulty:"easy",text:"用人单位自用工之日起即与劳动者建立劳动关系。",answer:"正确",explanation:"用人单位自用工之日起即与劳动者建立劳动关系。建立劳动关系，应当订立书面劳动合同。"},
+            {id:48,type:"单选",point:"企业所得税",difficulty:"hard",text:"下列各项中，固定资产计算折旧的最低年限为 10 年的是？",options:{A:"房屋、建筑物",B:"飞机、火车、轮船、机器、机械和其他生产设备",C:"与生产经营活动有关的器具、工具、家具等",D:"飞机、火车、轮船以外的运输工具"},answer:"B",explanation:"飞机、火车、轮船、机器、机械和其他生产设备，折旧最低年限为 10 年。"},
+            {id:49,type:"多选",point:"增值税",difficulty:"hard",text:"下列各项中，属于增值税视同销售行为的有？",options:{A:"将自产货物用于集体福利",B:"将购进货物无偿赠送其他单位",C:"将自产货物用于个人消费",D:"将委托加工收回的货物用于投资"},answer:"ABCD",explanation:"以上都属于增值税视同销售行为。"},
+            {id:50,type:"单选",point:"会计法律制度",difficulty:"medium",text:"下列各项中，担任单位会计机构负责人的，应当具备会计师以上专业技术职务资格或者从事会计工作不少于多少年？",options:{A:"2 年",B:"3 年",C:"4 年",D:"5 年"},answer:"B",explanation:"担任单位会计机构负责人的，应当具备会计师以上专业技术职务资格或者从事会计工作不少于 3 年。"},
+            {id:51,type:"单选",point:"会计法律制度",difficulty:"medium",text:"下列各项中，属于会计档案定期保管期限的是？",options:{A:"3 年",B:"5 年",C:"10 年",D:"以上都是"},answer:"D",explanation:"会计档案定期保管期限分为 3 年、5 年、10 年、15 年、25 年等。"},
+            {id:52,type:"多选",point:"票据法",difficulty:"hard",text:"下列各项中，属于汇票绝对记载事项的有？",options:{A:"表明'汇票'的字样",B:"无条件支付的委托",C:"确定的金额",D:"付款人名称"},answer:"ABCD",explanation:"汇票绝对记载事项包括：表明汇票的字样、无条件支付的委托、确定的金额、付款人名称、收款人名称、出票日期、出票人签章。"},
+            {id:53,type:"判断",point:"支付结算",difficulty:"medium",text:"单位银行卡账户的资金必须由其基本存款账户转账存入。",answer:"正确",explanation:"单位银行卡账户的资金必须由其基本存款账户转账存入，不得办理现金收付业务。"},
+            {id:54,type:"单选",point:"增值税",difficulty:"hard",text:"下列各项中，不属于增值税征税范围的是？",options:{A:"销售货物",B:"提供加工劳务",C:"提供修理修配劳务",D:"转让土地使用权"},answer:"D",explanation:"转让土地使用权属于销售无形资产。"},
+            {id:55,type:"多选",point:"消费税",difficulty:"hard",text:"下列各项中，采用从量定额计征消费税的有？",options:{A:"啤酒",B:"黄酒",C:"成品油",D:"白酒"},answer:"ABC",explanation:"啤酒、黄酒、成品油采用从量定额计征。白酒采用复合计征。"},
+            {id:56,type:"判断",point:"企业所得税",difficulty:"medium",text:"企业发生的职工福利费支出，不超过工资薪金总额 14% 的部分，准予扣除。",answer:"正确",explanation:"企业发生的职工福利费支出，不超过工资薪金总额 14% 的部分，准予扣除。"},
+            {id:57,type:"单选",point:"个人所得税",difficulty:"medium",text:"下列各项中，适用 20% 比例税率的是？",options:{A:"工资薪金所得",B:"劳务报酬所得",C:"利息股息红利所得",D:"经营所得"},answer:"C",explanation:"利息股息红利所得适用 20% 比例税率。"},
+            {id:58,type:"多选",point:"劳动合同法",difficulty:"hard",text:"下列各项中，用人单位不得解除劳动合同的情形有？",options:{A:"劳动者患病在规定的医疗期内",B:"女职工在孕期",C:"劳动者在本单位患职业病",D:"劳动者因工负伤并被确认丧失劳动能力"},answer:"ABCD",explanation:"这些都是用人单位不得解除劳动合同的情形。"},
+            {id:59,type:"判断",point:"支付结算",difficulty:"easy",text:"商业汇票的付款期限最长不得超过 6 个月。",answer:"正确",explanation:"商业汇票的付款期限最长不得超过 6 个月。"},
+            {id:60,type:"单选",point:"会计法律制度",difficulty:"hard",text:"下列各项中，有权对会计师事务所出具审计报告的程序和内容进行监督的是？",options:{A:"财政部门",B:"税务部门",C:"审计部门",D:"证监会"},answer:"A",explanation:"财政部门有权对会计师事务所出具审计报告的程序和内容进行监督。"},
+            {id:61,type:"多选",point:"票据法",difficulty:"medium",text:"下列各项中，票据权利包括？",options:{A:"付款请求权",B:"追索权",C:"利益返还请求权",D:"票据抗辩权"},answer:"AB",explanation:"票据权利包括付款请求权和追索权。"},
+            {id:62,type:"判断",point:"增值税",difficulty:"hard",text:"纳税人销售货物同时收取的包装物押金，一律并入销售额征税。",answer:"错误",explanation:"除啤酒、黄酒外的其他酒类产品收取的包装物押金，无论是否返还均并入销售额征税。"},
+            {id:63,type:"单选",point:"消费税",difficulty:"hard",text:"纳税人自产自用的应税消费品，用于连续生产应税消费品的？",options:{A:"视同销售",B:"不纳税",C:"减半纳税",D:"免税"},answer:"B",explanation:"纳税人自产自用的应税消费品，用于连续生产应税消费品的，不纳税。"},
+            {id:64,type:"多选",point:"企业所得税",difficulty:"hard",text:"下列各项中，属于不征税收入的有？",options:{A:"财政拨款",B:"依法收取并纳入财政管理的行政事业性收费",C:"政府性基金",D:"国债利息收入"},answer:"ABC",explanation:"财政拨款、行政事业性收费、政府性基金属于不征税收入。国债利息收入属于免税收入。"},
+            {id:65,type:"判断",point:"个人所得税",difficulty:"easy",text:"居民个人综合所得按年计算个人所得税。",answer:"正确",explanation:"居民个人综合所得按年计算个人所得税，实行代扣代缴和自行申报相结合的征收方式。"},
+            {id:66,type:"单选",point:"劳动合同法",difficulty:"medium",text:"下列各项中，经济补偿金的计算标准是？",options:{A:"按劳动者在本单位工作的年限，每满一年支付一个月工资",B:"按劳动者在本单位工作的年限，每满一年支付两个月工资",C:"统一支付三个月工资",D:"统一支付六个月工资"},answer:"A",explanation:"经济补偿按劳动者在本单位工作的年限，每满一年支付一个月工资的标准向劳动者支付。"},
+            {id:67,type:"多选",point:"支付结算",difficulty:"medium",text:"下列各项中，属于银行卡按信息载体不同分类的有？",options:{A:"磁条卡",B:"芯片卡",C:"信用卡",D:"借记卡"},answer:"AB",explanation:"银行卡按信息载体分为磁条卡和芯片卡。按是否透支分为信用卡和借记卡。"},
+            {id:68,type:"判断",point:"会计法律制度",difficulty:"easy",text:"会计人员调动工作或者离职，必须与接管人员办清交接手续。",answer:"正确",explanation:"会计人员调动工作或者离职，必须与接管人员办清交接手续。"},
+            {id:69,type:"单选",point:"票据法",difficulty:"easy",text:"支票的持票人应当自出票日起多长时间内提示付款？",options:{A:"5 日",B:"10 日",C:"15 日",D:"1 个月"},answer:"B",explanation:"支票的持票人应当自出票日起 10 日内提示付款。"},
+            {id:70,type:"多选",point:"增值税",difficulty:"medium",text:"下列各项中，适用 6% 增值税税率的有？",options:{A:"增值电信服务",B:"金融服务",C:"生活服务",D:"现代服务"},answer:"ABCD",explanation:"增值电信服务、金融服务、生活服务、现代服务适用 6% 增值税税率。"},
+            {id:71,type:"判断",point:"消费税",difficulty:"medium",text:"委托加工的应税消费品，由受托方在向委托方交货时代收代缴消费税。",answer:"正确",explanation:"委托加工的应税消费品，除受托方为个人外，由受托方在向委托方交货时代收代缴消费税。"},
+            {id:72,type:"单选",point:"企业所得税",difficulty:"hard",text:"企业发生的与生产经营活动有关的业务招待费支出，按照发生额的多少扣除？",options:{A:"50%",B:"60%",C:"70%",D:"80%"},answer:"B",explanation:"企业发生的与生产经营活动有关的业务招待费支出，按照发生额的 60% 扣除，但最高不得超过当年销售（营业）收入的 5‰。"},
+            {id:73,type:"多选",point:"个人所得税",difficulty:"medium",text:"下列各项中，属于专项附加扣除的有？",options:{A:"子女教育",B:"继续教育",C:"住房贷款利息",D:"赡养老人"},answer:"ABCD",explanation:"专项附加扣除包括子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人。"},
+            {id:74,type:"判断",point:"劳动合同法",difficulty:"easy",text:"非全日制用工双方当事人可以订立口头协议。",answer:"正确",explanation:"非全日制用工双方当事人可以订立口头协议，不得约定试用期。"},
+            {id:75,type:"单选",point:"支付结算",difficulty:"hard",text:"下列各项中，托收承付结算方式每笔的金额起点是？",options:{A:"1000 元",B:"5000 元",C:"10000 元",D:"50000 元"},answer:"C",explanation:"托收承付结算方式每笔的金额起点是 10000 元。"},
+            {id:76,type:"多选",point:"会计法律制度",difficulty:"hard",text:"下列各项中，属于不相容职务的有？",options:{A:"出纳与稽核",B:"出纳与会计档案保管",C:"出纳与收入、支出、费用账簿登记",D:"出纳与债权债务账簿登记"},answer:"ABCD",explanation:"出纳人员不得兼任稽核、会计档案保管和收入、支出、费用、债权债务账目的登记工作。"},
+            {id:77,type:"判断",point:"票据法",difficulty:"easy",text:"票据的出票日期必须使用中文大写。",answer:"正确",explanation:"票据的出票日期必须使用中文大写，防止变造。"},
+            {id:78,type:"单选",point:"增值税",difficulty:"easy",text:"小规模纳税人增值税征收率为？",options:{A:"3%",B:"5%",C:"6%",D:"9%"},answer:"A",explanation:"小规模纳税人增值税征收率为 3%，国务院另有规定的除外。"},
+            {id:79,type:"多选",point:"消费税",difficulty:"medium",text:"下列各项中，属于消费税纳税环节的有？",options:{A:"生产环节",B:"委托加工环节",C:"进口环节",D:"零售环节"},answer:"ABCD",explanation:"消费税纳税环节包括生产、委托加工、进口环节，部分应税消费品在零售环节也征税。"},
+            {id:80,type:"判断",point:"企业所得税",difficulty:"hard",text:"企业购置并实际使用环境保护、节能节水、安全生产等专用设备的，该专用设备的投资额的 10% 可以从企业当年的应纳税额中抵免。",answer:"正确",explanation:"企业购置并实际使用环境保护、节能节水、安全生产等专用设备的，该专用设备的投资额的 10% 可以从企业当年的应纳税额中抵免。"},
+            {id:81,type:"单选",point:"个人所得税",difficulty:"medium",text:"下列各项中，稿酬所得减按多少比例计算收入额？",options:{A:"50%",B:"60%",C:"70%",D:"80%"},answer:"C",explanation:"稿酬所得减按 70% 计算收入额。"},
+            {id:82,type:"多选",point:"劳动合同法",difficulty:"hard",text:"下列各项中，属于劳动合同终止情形的有？",options:{A:"劳动合同期满",B:"劳动者开始依法享受基本养老保险待遇",C:"劳动者死亡",D:"用人单位被依法宣告破产"},answer:"ABCD",explanation:"这些都是劳动合同终止的法定情形。"},
+            {id:83,type:"判断",point:"支付结算",difficulty:"medium",text:"信用证结算方式适用于国内企业之间的商品交易。",answer:"正确",explanation:"国内信用证结算方式适用于国内企业之间的商品交易。"},
+            {id:84,type:"单选",point:"会计法律制度",difficulty:"medium",text:"下列各项中，会计从业资格证书实行什么制度？",options:{A:"考试制度",B:"登记制度",C:"继续教育制度",D:"已取消"},answer:"D",explanation:"会计从业资格证书已于 2017 年取消。"},
+            {id:85,type:"多选",point:"票据法",difficulty:"hard",text:"下列各项中，属于票据保证绝对记载事项的有？",options:{A:"表明'保证'的字样",B:"保证人名称和住所",C:"被保证人的名称",D:"保证日期"},answer:"AB",explanation:"票据保证绝对记载事项包括：表明保证的字样、保证人名称和住所、保证人签章。"},
+            {id:86,type:"判断",point:"增值税",difficulty:"medium",text:"纳税人兼营不同税率的货物或者应税劳务，应当分别核算不同税率货物或者应税劳务的销售额。",answer:"正确",explanation:"纳税人兼营不同税率的货物或者应税劳务，应当分别核算；未分别核算销售额的，从高适用税率。"},
+            {id:87,type:"单选",point:"消费税",difficulty:"medium",text:"下列各项中，不属于消费税征税范围的是？",options:{A:"高档手表",B:"高档化妆品",C:"普通护肤品",D:"实木地板"},answer:"C",explanation:"普通护肤品不属于消费税征税范围。"},
+            {id:88,type:"多选",point:"企业所得税",difficulty:"hard",text:"下列各项中，固定资产计算折旧的最低年限为 10 年的有？",options:{A:"房屋",B:"建筑物",C:"飞机",D:"机器设备"},answer:"CD",explanation:"飞机、火车、轮船、机器、机械和其他生产设备折旧最低年限为 10 年。房屋、建筑物为 20 年。"},
+            {id:89,type:"判断",point:"个人所得税",difficulty:"medium",text:"非居民个人从中国境内取得的所得，应当缴纳个人所得税。",answer:"正确",explanation:"非居民个人从中国境内取得的所得，依照本法规定缴纳个人所得税。"},
+            {id:90,type:"单选",point:"劳动合同法",difficulty:"medium",text:"下列各项中，劳务派遣单位应当与被派遣劳动者订立多长期限的劳动合同？",options:{A:"1 年以上",B:"2 年以上",C:"3 年以上",D:"5 年以上"},answer:"B",explanation:"劳务派遣单位应当与被派遣劳动者订立 2 年以上的固定期限劳动合同。"},
+            {id:91,type:"多选",point:"支付结算",difficulty:"hard",text:"下列各项中，属于电子商业汇票当事人的有？",options:{A:"出票人",B:"收款人",C:"付款人",D:"承兑人"},answer:"ABCD",explanation:"电子商业汇票当事人包括出票人、收款人、付款人、承兑人、背书人、被背书人、保证人等。"},
+            {id:92,type:"判断",point:"会计法律制度",difficulty:"easy",text:"单位负责人对本单位的会计工作和会计资料的真实性、完整性负责。",answer:"正确",explanation:"单位负责人对本单位的会计工作和会计资料的真实性、完整性负责。"},
+            {id:93,type:"单选",point:"票据法",difficulty:"easy",text:"下列各项中，银行汇票的提示付款期限自出票日起？",options:{A:"10 日",B:"1 个月",C:"2 个月",D:"3 个月"},answer:"B",explanation:"银行汇票的提示付款期限自出票日起 1 个月。"},
+            {id:94,type:"多选",point:"增值税",difficulty:"hard",text:"下列各项中，属于增值税混合销售的有？",options:{A:"商场销售空调并负责安装",B:"餐厅提供餐饮服务并销售酒水",C:"装修公司提供装修服务并销售装修材料",D:"汽车 4S 店销售汽车并提供售后服务"},answer:"ABCD",explanation:"以上都属于增值税混合销售行为，按主业适用税率征税。"},
+            {id:95,type:"判断",point:"消费税",difficulty:"hard",text:"纳税人销售的应税消费品，如因质量等原因由购买者退回时，可以自行抵减应纳税额。",answer:"错误",explanation:"纳税人销售的应税消费品，如因质量等原因由购买者退回时，经所在地主管税务机关审核批准后，可退还已征收的消费税税款，但不能自行抵减。"},
+            {id:96,type:"单选",point:"企业所得税",difficulty:"medium",text:"企业应当自年度终了之日起多长时间内，向税务机关报送年度企业所得税纳税申报表？",options:{A:"3 个月",B:"4 个月",C:"5 个月",D:"6 个月"},answer:"C",explanation:"企业应当自年度终了之日起 5 个月内，向税务机关报送年度企业所得税纳税申报表，并汇算清缴。"},
+            {id:97,type:"多选",point:"个人所得税",difficulty:"medium",text:"下列各项中，属于劳务报酬所得的有？",options:{A:"设计服务所得",B:"医疗服务所得",C:"咨询服务所得",D:"讲学所得"},answer:"ABCD",explanation:"劳务报酬所得包括设计、医疗、法律、会计、咨询、讲学、翻译、审稿、书画、雕刻、影视、录音、录像、演出、表演、广告、展览、技术服务、介绍服务、经纪服务、代办服务等。"},
+            {id:98,type:"判断",point:"劳动合同法",difficulty:"medium",text:"用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。",answer:"正确",explanation:"用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当向劳动者每月支付二倍的工资。"},
+            {id:99,type:"单选",point:"支付结算",difficulty:"hard",text:"下列各项中，预付卡单张记名预付卡资金限额不得超过？",options:{A:"1000 元",B:"2000 元",C:"5000 元",D:"10000 元"},answer:"C",explanation:"单张记名预付卡资金限额不得超过 5000 元，单张不记名预付卡资金限额不得超过 1000 元。"},
+            {id:100,type:"多选",point:"会计法律制度",difficulty:"medium",text:"下列各项中，属于会计职业道德内容的有？",options:{A:"爱岗敬业",B:"诚实守信",C:"廉洁自律",D:"客观公正"},answer:"ABCD",explanation:"会计职业道德包括爱岗敬业、诚实守信、廉洁自律、客观公正、坚持准则、提高技能、参与管理、强化服务。"}
         ];
-        // 经济法共 5 题（真实题目），待补充
+        // 经济法共 100 题
         
         let userAnswers = { accounting: {}, economy: {} };
         let scores = { accounting: 0, economy: 0 };
